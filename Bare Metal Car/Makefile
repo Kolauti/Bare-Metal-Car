@@ -35,7 +35,7 @@ clean:
 	rm -rf *.o *.elf
 
 socd:
-	openocd -f ./test.cfg
+	openocd -f ./STM32F103C6-OpenOcd.cfg
 
 sgdb:
 	arm-none-eabi-gdb
