@@ -1,6 +1,8 @@
 #ifndef __INTERUPT_DEFINITION_H_
 #define __INTERUPT_DEFINITION_H_
 
+#include <stdint.h>
+
 #define NVIC_EnableIRQ __NVIC_EnableIRQ
 
 /**
@@ -95,7 +97,7 @@ typedef enum
   \param [in]      IRQn  Device specific interrupt number.
   \note    IRQn must not be negative.
  */
-__STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
+static inline void __NVIC_EnableIRQ(IRQn_Type IRQn)
 {
   if ((int32_t)(IRQn) >= 0)
   {

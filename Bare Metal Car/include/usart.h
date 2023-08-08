@@ -3,9 +3,9 @@
 
 #include <stdint.h>
 
-#define USART1_BUFFER_SIZE ((uint8_t)25) // Real size is USART1_BUFFER_SIZE - 1, last element is for terminating null
-#define APB2_CLK ((uint32_t)72000000)
-#define USART1_BAUD_RATE ((uint32_t)115200)
+#define USART2_BUFFER_SIZE ((uint8_t)25) // Real size is USART2_BUFFER_SIZE - 1, last element is for terminating null
+#define SYSTEM_CLOCK ((uint32_t)8000000)
+#define USART2_BAUD_RATE ((uint32_t)9600)
 
 // USART/UART addresses definition
 #define USART_1 (0x40013800)
@@ -211,9 +211,11 @@ typedef struct
 // USART Port registers access macro
 #define __USARTRA(x) ((USARTR *)x)
 
-void USART1_Init();
-void USART1_SendChar(char chr);
-void USART1_SendString(char *str);
-uint8_t USART1_ReadString(char *str);
+void USART2_Init();
+void USART2_SendChar(char chr);
+void USART2_SendString(char *str);
+char USART2_ReadLastChar();
+uint8_t USART2_ReadString(char *str);
+void USART2_ResetLastChar();
 
 #endif /* __USART_H_ */
