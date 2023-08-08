@@ -23,7 +23,6 @@
 #define CAR_OFF_HIGH_RIGHT_4_3 0x0000C000 // IN4 & IN3
 
 // L293D motor driver IC
-
 void motorCtrlInit()
 {
 	// Enable clock on port B
@@ -62,14 +61,13 @@ void motorEnable()
 void motorDisable()
 {
 	_GPIOPRA(GPIO_P_B)->ODR &= ~MOTOR_ENABLE_ALL_1_2_4_3;
+	_GPIOPRA(GPIO_P_B)->ODR &= ~CAR_OFF_HIGH_LEFT_1_2;
+	_GPIOPRA(GPIO_P_B)->ODR &= ~CAR_OFF_HIGH_RIGHT_4_3;
 }
 
 void carForward()
 {
-	_GPIOPRA(GPIO_P_B)->ODR |= MOTOR_ENABLE_ALL_1_2_4_3;
-
-	_GPIOPRA(GPIO_P_B)->ODR &= ~CAR_OFF_HIGH_LEFT_1_2;
-	_GPIOPRA(GPIO_P_B)->ODR &= ~CAR_OFF_HIGH_RIGHT_4_3;
+	motorEnable();
 
 	_GPIOPRA(GPIO_P_B)->ODR |= CAR_FORWARD_LEFT_1_2;
 	_GPIOPRA(GPIO_P_B)->ODR |= CAR_FORWARD_RIGHT_4_3;
@@ -77,10 +75,7 @@ void carForward()
 
 void carBackward()
 {
-	_GPIOPRA(GPIO_P_B)->ODR |= MOTOR_ENABLE_ALL_1_2_4_3;
-
-	_GPIOPRA(GPIO_P_B)->ODR &= ~CAR_OFF_HIGH_LEFT_1_2;
-	_GPIOPRA(GPIO_P_B)->ODR &= ~CAR_OFF_HIGH_RIGHT_4_3;
+	motorEnable();
 
 	_GPIOPRA(GPIO_P_B)->ODR |= CAR_BACKWARD_LEFT_1_2;
 	_GPIOPRA(GPIO_P_B)->ODR |= CAR_BACKWARD_RIGHT_4_3;
