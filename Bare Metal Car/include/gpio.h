@@ -12,6 +12,9 @@
 #define GPIO_P_F (0x40011C00)
 #define GPIO_P_G (0x40012000)
 
+// AFIO Port address definition
+#define AFIO (0x40010000)
+
 /******************************************************************************/
 /*                                                                            */
 /*                General Purpose and Alternate Function I/O                  */
@@ -1125,5 +1128,22 @@ typedef struct
 
 // GPIO Port registers access macro
 #define _GPIOPRA(x) ((GPIOPR *)x)
+
+// AFIO Port registers access structure
+typedef struct
+{
+
+    volatile uint32_t AFIO_EVCR;
+    volatile uint32_t AFIO_MAPR;
+    volatile uint32_t AFIO_EXTICR1;
+    volatile uint32_t AFIO_EXTICR2;
+    volatile uint32_t AFIO_EXTICR3;
+    volatile uint32_t AFIO_EXTICR4;
+    volatile uint32_t AFIO_MAPR2;
+
+} AFIOR;
+
+// AFIO Port registers access macro
+#define _AFIORA(x) ((AFIOR *)x)
 
 #endif /* __GPIO_H_ */

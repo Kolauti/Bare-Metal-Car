@@ -9,9 +9,9 @@ CFLAGS= -c -mcpu=$(MACH) -mthumb -mfloat-abi=soft -std=gnu11 -Wall -O0
 LDFLAGS= -mcpu=$(MACH) -mthumb -mfloat-abi=soft --specs=nano.specs -T $(LINKER)stm32_ls.ld -Wl,-Map=final.map
 LDFLAGS_SH= -mcpu=$(MACH) -mthumb -mfloat-abi=soft --specs=rdimon.specs -T $(LINKER)stm32_ls.ld -Wl,-Map=final.map
 
-all:main.o usart.o carMotorCtrl.o stm32_startup.o syscalls.o final.elf
+all:main.o usart.o carMotorCtrl.o exti.o stm32_startup.o syscalls.o final.elf
 
-semi:main.o usart.o carMotorCtrl.o stm32_startup.o syscalls.o final_sh.elf
+semi:main.o usart.o carMotorCtrl.o exti.o stm32_startup.o syscalls.o final_sh.elf
 
 main.o:$(SOURCE)main.c
 	$(CC) $(CFLAGS) -o $@ $^ -I$(INCLUDE)
@@ -22,16 +22,19 @@ usart.o:$(SOURCE)usart.c
 carMotorCtrl.o:$(SOURCE)carMotorCtrl.c
 	$(CC) $(CFLAGS) -o $@ $^ -I$(INCLUDE)
 
+exti.o:$(SOURCE)exti.c
+	$(CC) $(CFLAGS) -o $@ $^ -I$(INCLUDE)
+
 stm32_startup.o:$(STARTUP)stm32_startup.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 syscalls.o:$(SYSCALLS)syscalls.c
 	$(CC) $(CFLAGS) -o $@ $^
 	
-final.elf:main.o usart.o carMotorCtrl.o stm32_startup.o syscalls.o
+final.elf:main.o usart.o carMotorCtrl.o exti.o stm32_startup.o syscalls.o
 	$(CC) $(LDFLAGS) -o $@ $^
 	
-final_sh.elf:main.o usart.o  carMotorCtrl.o stm32_startup.o
+final_sh.elf:main.o usart.o  carMotorCtrl.o exti.o stm32_startup.o
 	$(CC) $(LDFLAGS_SH) -o $@ $^
 
 clean:

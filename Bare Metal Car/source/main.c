@@ -4,6 +4,7 @@
 #include <gpio.h>
 #include "usart.h"
 #include "carMotorCtrl.h"
+#include "exti.h"
 
 #define LED_DELAY 500000UL // Ticks, 8MHz clock
 
@@ -11,6 +12,7 @@ int main(void)
 {
     USART2_Init();
     motorCtrlInit();
+    EXTI_Init();
 
     _RCCRA(RCC)->APB2ENR |= RCC_APB2ENR_IOPCEN;
 
@@ -19,8 +21,6 @@ int main(void)
     _GPIOPRA(GPIO_P_C)->CRH &= ~GPIO_CRH_CNF13;
 
     uint32_t led_delay_count = 0;
-
-    motorEnable();
 
     while (1)
     {

@@ -34,6 +34,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nof
 LOAD main.o
 LOAD usart.o
 LOAD carMotorCtrl.o
+LOAD exti.o
 LOAD stm32_startup.o
 LOAD syscalls.o
 START GROUP
@@ -47,7 +48,7 @@ END GROUP
 LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
 LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
 
-.text           0x0000000008000000      0xe2c
+.text           0x0000000008000000      0xf10
  *(.isr_vector)
  .isr_vector    0x0000000008000000      0x130 stm32_startup.o
                 0x0000000008000000                vectors
@@ -68,173 +69,175 @@ LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
                 0x000000000800050c                USART2_ReadString
                 0x0000000008000570                USART2_ResetLastChar
                 0x0000000008000588                USART2_IRQHandler
- .text          0x0000000008000630      0x1e8 carMotorCtrl.o
+ .text          0x0000000008000630      0x1d0 carMotorCtrl.o
                 0x0000000008000630                motorCtrlInit
                 0x0000000008000728                motorEnable
                 0x0000000008000744                motorDisable
                 0x0000000008000778                carForward
-                0x00000000080007ac                carBackward
-                0x00000000080007e0                carTurnLeft
-                0x00000000080007fc                carTurnRight
- .text          0x0000000008000818       0x90 stm32_startup.o
-                0x0000000008000818                EXTI2_IRQHandler
-                0x0000000008000818                TIM8_TRG_COM_IRQHandler
-                0x0000000008000818                TIM8_CC_IRQHandler
-                0x0000000008000818                DebugMon_Handler
-                0x0000000008000818                TIM1_CC_IRQHandler
-                0x0000000008000818                HardFault_Handler
-                0x0000000008000818                TIM6_IRQHandler
-                0x0000000008000818                SysTick_Handler
-                0x0000000008000818                PVD_IRQHandler
-                0x0000000008000818                SDIO_IRQHandler
-                0x0000000008000818                PendSV_Handler
-                0x0000000008000818                NMI_Handler
-                0x0000000008000818                EXTI3_IRQHandler
-                0x0000000008000818                USB_HP_CAN_TX_IRQHandler
-                0x0000000008000818                EXTI0_IRQHandler
-                0x0000000008000818                I2C2_EV_IRQHandler
-                0x0000000008000818                UsageFault_Handler
-                0x0000000008000818                ADC1_2_IRQHandler
-                0x0000000008000818                SPI1_IRQHandler
-                0x0000000008000818                TAMPER_IRQHandler
-                0x0000000008000818                TIM8_UP_IRQHandler
-                0x0000000008000818                DMA2_Channel2_IRQHandler
-                0x0000000008000818                DMA1_Channel4_IRQHandler
-                0x0000000008000818                USART3_IRQHandler
-                0x0000000008000818                RTC_IRQHandler
-                0x0000000008000818                DMA1_Channel7_IRQHandler
-                0x0000000008000818                CAN1_RX1_IRQHandler
-                0x0000000008000818                UART5_IRQHandler
-                0x0000000008000818                ADC3_IRQHandler
-                0x0000000008000818                USBWakeup_IRQHandler
-                0x0000000008000818                TIM4_IRQHandler
-                0x0000000008000818                DMA2_Channel1_IRQHandler
-                0x0000000008000818                I2C1_EV_IRQHandler
-                0x0000000008000818                DMA1_Channel6_IRQHandler
-                0x0000000008000818                UART4_IRQHandler
-                0x0000000008000818                TIM3_IRQHandler
-                0x0000000008000818                RCC_IRQHandler
-                0x0000000008000818                TIM1_TRG_COM_IRQHandler
-                0x0000000008000818                DMA1_Channel1_IRQHandler
-                0x0000000008000818                Default_Handler
-                0x0000000008000818                EXTI15_10_IRQHandler
-                0x0000000008000818                TIM7_IRQHandler
-                0x0000000008000818                TIM5_IRQHandler
-                0x0000000008000818                EXTI9_5_IRQHandler
-                0x0000000008000818                SPI2_IRQHandler
-                0x0000000008000818                USB_LP_CAN_RX0_IRQHandler
-                0x0000000008000818                MemManage_Handler
-                0x0000000008000818                SVC_Handler
-                0x0000000008000818                DMA1_Channel5_IRQHandler
-                0x0000000008000818                EXTI4_IRQHandler
-                0x0000000008000818                DMA1_Channel3_IRQHandler
-                0x0000000008000818                FSMC_IRQHandler
-                0x0000000008000818                TIM1_UP_IRQHandler
-                0x0000000008000818                WWDG_IRQHandler
-                0x0000000008000818                TIM2_IRQHandler
-                0x0000000008000818                TIM1_BRK_IRQHandler
-                0x0000000008000818                EXTI1_IRQHandler
-                0x0000000008000818                RTCAlarm_IRQHandler
-                0x0000000008000818                DMA2_Channel4_5_IRQHandler
-                0x0000000008000818                I2C2_ER_IRQHandler
-                0x0000000008000818                DMA1_Channel2_IRQHandler
-                0x0000000008000818                TIM8_BRK_IRQHandler
-                0x0000000008000818                CAN1_SCE_IRQHandler
-                0x0000000008000818                FLASH_IRQHandler
-                0x0000000008000818                BusFault_Handler
-                0x0000000008000818                USART1_IRQHandler
-                0x0000000008000818                SPI3_IRQHandler
-                0x0000000008000818                I2C1_ER_IRQHandler
-                0x0000000008000818                DMA2_Channel3_IRQHandler
-                0x000000000800081e                Reset_Handler
- .text          0x00000000080008a8      0x25c syscalls.o
-                0x00000000080008a8                initialise_monitor_handles
-                0x00000000080008b4                _getpid
-                0x00000000080008c2                _kill
-                0x00000000080008e2                _exit
-                0x00000000080008f6                _read
-                0x0000000008000930                _write
-                0x0000000008000968                _close
-                0x000000000800097e                _fstat
-                0x000000000800099c                _isatty
-                0x00000000080009b0                _lseek
-                0x00000000080009c8                _open
-                0x00000000080009e2                _wait
-                0x0000000008000a00                _unlink
-                0x0000000008000a1e                _times
-                0x0000000008000a34                _stat
-                0x0000000008000a52                _link
-                0x0000000008000a72                _fork
-                0x0000000008000a88                _execve
-                0x0000000008000aaa                _sbrk
- .text          0x0000000008000b04        0xc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-atexit.o)
-                0x0000000008000b04                atexit
- .text          0x0000000008000b10        0xc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-errno.o)
-                0x0000000008000b10                __errno
- .text          0x0000000008000b1c       0x28 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
-                0x0000000008000b1c                exit
- .text          0x0000000008000b44       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-fini.o)
-                0x0000000008000b44                __libc_fini_array
- .text          0x0000000008000b70        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
- .text          0x0000000008000b70       0x48 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-init.o)
-                0x0000000008000b70                __libc_init_array
- .text          0x0000000008000bb8       0xa4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
-                0x0000000008000bb8                memset
- .text          0x0000000008000c5c       0xac /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__atexit.o)
-                0x0000000008000c5c                __register_exitproc
- .text          0x0000000008000d08       0xc0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
-                0x0000000008000d08                __call_exitprocs
- .text          0x0000000008000dc8        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
- .text          0x0000000008000dc8        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
+                0x00000000080007a0                carBackward
+                0x00000000080007c8                carTurnLeft
+                0x00000000080007e4                carTurnRight
+ .text          0x0000000008000800       0xfc exti.o
+                0x0000000008000838                EXTI_Init
+                0x00000000080008c8                EXTI0_IRQHandler
+ .text          0x00000000080008fc       0x90 stm32_startup.o
+                0x00000000080008fc                EXTI2_IRQHandler
+                0x00000000080008fc                TIM8_TRG_COM_IRQHandler
+                0x00000000080008fc                TIM8_CC_IRQHandler
+                0x00000000080008fc                DebugMon_Handler
+                0x00000000080008fc                TIM1_CC_IRQHandler
+                0x00000000080008fc                HardFault_Handler
+                0x00000000080008fc                TIM6_IRQHandler
+                0x00000000080008fc                SysTick_Handler
+                0x00000000080008fc                PVD_IRQHandler
+                0x00000000080008fc                SDIO_IRQHandler
+                0x00000000080008fc                PendSV_Handler
+                0x00000000080008fc                NMI_Handler
+                0x00000000080008fc                EXTI3_IRQHandler
+                0x00000000080008fc                USB_HP_CAN_TX_IRQHandler
+                0x00000000080008fc                I2C2_EV_IRQHandler
+                0x00000000080008fc                UsageFault_Handler
+                0x00000000080008fc                ADC1_2_IRQHandler
+                0x00000000080008fc                SPI1_IRQHandler
+                0x00000000080008fc                TAMPER_IRQHandler
+                0x00000000080008fc                TIM8_UP_IRQHandler
+                0x00000000080008fc                DMA2_Channel2_IRQHandler
+                0x00000000080008fc                DMA1_Channel4_IRQHandler
+                0x00000000080008fc                USART3_IRQHandler
+                0x00000000080008fc                RTC_IRQHandler
+                0x00000000080008fc                DMA1_Channel7_IRQHandler
+                0x00000000080008fc                CAN1_RX1_IRQHandler
+                0x00000000080008fc                UART5_IRQHandler
+                0x00000000080008fc                ADC3_IRQHandler
+                0x00000000080008fc                USBWakeup_IRQHandler
+                0x00000000080008fc                TIM4_IRQHandler
+                0x00000000080008fc                DMA2_Channel1_IRQHandler
+                0x00000000080008fc                I2C1_EV_IRQHandler
+                0x00000000080008fc                DMA1_Channel6_IRQHandler
+                0x00000000080008fc                UART4_IRQHandler
+                0x00000000080008fc                TIM3_IRQHandler
+                0x00000000080008fc                RCC_IRQHandler
+                0x00000000080008fc                TIM1_TRG_COM_IRQHandler
+                0x00000000080008fc                DMA1_Channel1_IRQHandler
+                0x00000000080008fc                Default_Handler
+                0x00000000080008fc                EXTI15_10_IRQHandler
+                0x00000000080008fc                TIM7_IRQHandler
+                0x00000000080008fc                TIM5_IRQHandler
+                0x00000000080008fc                EXTI9_5_IRQHandler
+                0x00000000080008fc                SPI2_IRQHandler
+                0x00000000080008fc                USB_LP_CAN_RX0_IRQHandler
+                0x00000000080008fc                MemManage_Handler
+                0x00000000080008fc                SVC_Handler
+                0x00000000080008fc                DMA1_Channel5_IRQHandler
+                0x00000000080008fc                EXTI4_IRQHandler
+                0x00000000080008fc                DMA1_Channel3_IRQHandler
+                0x00000000080008fc                FSMC_IRQHandler
+                0x00000000080008fc                TIM1_UP_IRQHandler
+                0x00000000080008fc                WWDG_IRQHandler
+                0x00000000080008fc                TIM2_IRQHandler
+                0x00000000080008fc                TIM1_BRK_IRQHandler
+                0x00000000080008fc                EXTI1_IRQHandler
+                0x00000000080008fc                RTCAlarm_IRQHandler
+                0x00000000080008fc                DMA2_Channel4_5_IRQHandler
+                0x00000000080008fc                I2C2_ER_IRQHandler
+                0x00000000080008fc                DMA1_Channel2_IRQHandler
+                0x00000000080008fc                TIM8_BRK_IRQHandler
+                0x00000000080008fc                CAN1_SCE_IRQHandler
+                0x00000000080008fc                FLASH_IRQHandler
+                0x00000000080008fc                BusFault_Handler
+                0x00000000080008fc                USART1_IRQHandler
+                0x00000000080008fc                SPI3_IRQHandler
+                0x00000000080008fc                I2C1_ER_IRQHandler
+                0x00000000080008fc                DMA2_Channel3_IRQHandler
+                0x0000000008000902                Reset_Handler
+ .text          0x000000000800098c      0x25c syscalls.o
+                0x000000000800098c                initialise_monitor_handles
+                0x0000000008000998                _getpid
+                0x00000000080009a6                _kill
+                0x00000000080009c6                _exit
+                0x00000000080009da                _read
+                0x0000000008000a14                _write
+                0x0000000008000a4c                _close
+                0x0000000008000a62                _fstat
+                0x0000000008000a80                _isatty
+                0x0000000008000a94                _lseek
+                0x0000000008000aac                _open
+                0x0000000008000ac6                _wait
+                0x0000000008000ae4                _unlink
+                0x0000000008000b02                _times
+                0x0000000008000b18                _stat
+                0x0000000008000b36                _link
+                0x0000000008000b56                _fork
+                0x0000000008000b6c                _execve
+                0x0000000008000b8e                _sbrk
+ .text          0x0000000008000be8        0xc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-atexit.o)
+                0x0000000008000be8                atexit
+ .text          0x0000000008000bf4        0xc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-errno.o)
+                0x0000000008000bf4                __errno
+ .text          0x0000000008000c00       0x28 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
+                0x0000000008000c00                exit
+ .text          0x0000000008000c28       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-fini.o)
+                0x0000000008000c28                __libc_fini_array
+ .text          0x0000000008000c54        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
+ .text          0x0000000008000c54       0x48 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-init.o)
+                0x0000000008000c54                __libc_init_array
+ .text          0x0000000008000c9c       0xa4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
+                0x0000000008000c9c                memset
+ .text          0x0000000008000d40       0xac /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__atexit.o)
+                0x0000000008000d40                __register_exitproc
+ .text          0x0000000008000dec       0xc0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
+                0x0000000008000dec                __call_exitprocs
+ .text          0x0000000008000eac        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
+ .text          0x0000000008000eac        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
  *(.text.*)
  *(.init)
- .init          0x0000000008000dc8        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
-                0x0000000008000dc8                _init
- .init          0x0000000008000dcc        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
+ .init          0x0000000008000eac        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
+                0x0000000008000eac                _init
+ .init          0x0000000008000eb0        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
  *(.fini)
- .fini          0x0000000008000dd4        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
-                0x0000000008000dd4                _fini
- .fini          0x0000000008000dd8        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
+ .fini          0x0000000008000eb8        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
+                0x0000000008000eb8                _fini
+ .fini          0x0000000008000ebc        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
  *(.rodata)
- .rodata        0x0000000008000de0       0x24 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
- .rodata        0x0000000008000e04        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
-                0x0000000008000e04                _global_impure_ptr
- .rodata        0x0000000008000e08       0x24 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
+ .rodata        0x0000000008000ec4       0x24 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+ .rodata        0x0000000008000ee8        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
+                0x0000000008000ee8                _global_impure_ptr
+ .rodata        0x0000000008000eec       0x24 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
  *(.rodata.*)
-                0x0000000008000e2c                . = ALIGN (0x4)
-                0x0000000008000e2c                _etext = .
-                0x0000000008000e38                _la_data = LOADADDR (.data)
+                0x0000000008000f10                . = ALIGN (0x4)
+                0x0000000008000f10                _etext = .
+                0x0000000008000f1c                _la_data = LOADADDR (.data)
 
-.glue_7         0x0000000008000e2c        0x0
- .glue_7        0x0000000008000e2c        0x0 linker stubs
+.glue_7         0x0000000008000f10        0x0
+ .glue_7        0x0000000008000f10        0x0 linker stubs
 
-.glue_7t        0x0000000008000e2c        0x0
- .glue_7t       0x0000000008000e2c        0x0 linker stubs
+.glue_7t        0x0000000008000f10        0x0
+ .glue_7t       0x0000000008000f10        0x0 linker stubs
 
-.vfp11_veneer   0x0000000008000e2c        0x0
- .vfp11_veneer  0x0000000008000e2c        0x0 linker stubs
+.vfp11_veneer   0x0000000008000f10        0x0
+ .vfp11_veneer  0x0000000008000f10        0x0 linker stubs
 
-.v4_bx          0x0000000008000e2c        0x0
- .v4_bx         0x0000000008000e2c        0x0 linker stubs
+.v4_bx          0x0000000008000f10        0x0
+ .v4_bx         0x0000000008000f10        0x0 linker stubs
 
-.iplt           0x0000000008000e2c        0x0
- .iplt          0x0000000008000e2c        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+.iplt           0x0000000008000f10        0x0
+ .iplt          0x0000000008000f10        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 
-.eh_frame       0x0000000008000e2c        0x4
- .eh_frame      0x0000000008000e2c        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
- .eh_frame      0x0000000008000e2c        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
+.eh_frame       0x0000000008000f10        0x4
+ .eh_frame      0x0000000008000f10        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+ .eh_frame      0x0000000008000f10        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
 
-.ARM.extab      0x0000000008000e30        0x0
- .ARM.extab     0x0000000008000e30        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
+.ARM.extab      0x0000000008000f14        0x0
+ .ARM.extab     0x0000000008000f14        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
 
-.ARM.exidx      0x0000000008000e30        0x8
- .ARM.exidx     0x0000000008000e30        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
+.ARM.exidx      0x0000000008000f14        0x8
+ .ARM.exidx     0x0000000008000f14        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
                                          0x10 (size before relaxing)
 
-.rel.dyn        0x0000000008000e38        0x0
- .rel.iplt      0x0000000008000e38        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
+.rel.dyn        0x0000000008000f1c        0x0
+ .rel.iplt      0x0000000008000f1c        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 
-.data           0x0000000020000000       0x74 load address 0x0000000008000e38
+.data           0x0000000020000000       0x74 load address 0x0000000008000f1c
                 0x0000000020000000                _sdata = .
  *(.data)
  .data          0x0000000020000000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
@@ -245,6 +248,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
  .data          0x0000000020000004        0x1 usart.o
                 0x0000000020000004                usart2_last_char
  .data          0x0000000020000005        0x0 carMotorCtrl.o
+ .data          0x0000000020000005        0x0 exti.o
  .data          0x0000000020000005        0x0 stm32_startup.o
  *fill*         0x0000000020000005        0x3 
  .data          0x0000000020000008        0x4 syscalls.o
@@ -266,23 +270,23 @@ LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
                 0x0000000020000074                . = ALIGN (0x4)
                 0x0000000020000074                _edata = .
 
-.init_array     0x0000000020000074        0x4 load address 0x0000000008000eac
+.init_array     0x0000000020000074        0x4 load address 0x0000000008000f90
  .init_array    0x0000000020000074        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 
-.fini_array     0x0000000020000078        0x4 load address 0x0000000008000eb0
+.fini_array     0x0000000020000078        0x4 load address 0x0000000008000f94
  .fini_array    0x0000000020000078        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 
 .tm_clone_table
-                0x000000002000007c        0x0 load address 0x0000000008000eb4
+                0x000000002000007c        0x0 load address 0x0000000008000f98
  .tm_clone_table
                 0x000000002000007c        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
  .tm_clone_table
                 0x000000002000007c        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
 
-.igot.plt       0x000000002000007c        0x0 load address 0x0000000008000eb4
+.igot.plt       0x000000002000007c        0x0 load address 0x0000000008000f98
  .igot.plt      0x000000002000007c        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 
-.bss            0x000000002000007c       0xd0 load address 0x0000000008000eb4
+.bss            0x000000002000007c       0xd0 load address 0x0000000008000f98
                 0x000000002000007c                _sbss = .
                 0x000000002000007c                __bss_start__ = _sbss
  *(.bss)
@@ -295,6 +299,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
                 0x00000000200000b1                usart2_index
                 0x00000000200000b2                usart2_read_ready
  .bss           0x00000000200000b3        0x0 carMotorCtrl.o
+ .bss           0x00000000200000b3        0x0 exti.o
  .bss           0x00000000200000b3        0x0 stm32_startup.o
  *fill*         0x00000000200000b3        0x1 
  .bss           0x00000000200000b4        0x8 syscalls.o
@@ -337,31 +342,33 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000000000000bf       0x2d carMotorCtrl.o
  .ARM.attributes
-                0x00000000000000ec       0x2d stm32_startup.o
+                0x00000000000000ec       0x2d exti.o
  .ARM.attributes
-                0x0000000000000119       0x2d syscalls.o
+                0x0000000000000119       0x2d stm32_startup.o
  .ARM.attributes
-                0x0000000000000146       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-atexit.o)
+                0x0000000000000146       0x2d syscalls.o
  .ARM.attributes
-                0x0000000000000173       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-errno.o)
+                0x0000000000000173       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-atexit.o)
  .ARM.attributes
-                0x00000000000001a0       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
+                0x00000000000001a0       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-errno.o)
  .ARM.attributes
-                0x00000000000001cd       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-fini.o)
+                0x00000000000001cd       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-exit.o)
  .ARM.attributes
-                0x00000000000001fa       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
+                0x00000000000001fa       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-fini.o)
  .ARM.attributes
-                0x0000000000000227       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-init.o)
+                0x0000000000000227       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-impure.o)
  .ARM.attributes
-                0x0000000000000254       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
+                0x0000000000000254       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-init.o)
  .ARM.attributes
-                0x0000000000000281       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__atexit.o)
+                0x0000000000000281       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-memset.o)
  .ARM.attributes
-                0x00000000000002ae       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
+                0x00000000000002ae       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__atexit.o)
  .ARM.attributes
-                0x00000000000002db       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
+                0x00000000000002db       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-__call_atexit.o)
  .ARM.attributes
-                0x0000000000000308       0x1d /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
+                0x0000000000000308       0x2d /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtend.o
+ .ARM.attributes
+                0x0000000000000335       0x1d /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtn.o
 
 .comment        0x0000000000000000       0x33
  .comment       0x0000000000000000       0x33 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
@@ -369,6 +376,7 @@ LOAD linker stubs
  .comment       0x0000000000000033       0x34 main.o
  .comment       0x0000000000000033       0x34 usart.o
  .comment       0x0000000000000033       0x34 carMotorCtrl.o
+ .comment       0x0000000000000033       0x34 exti.o
  .comment       0x0000000000000033       0x34 stm32_startup.o
  .comment       0x0000000000000033       0x34 syscalls.o
  .comment       0x0000000000000033       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-atexit.o)
