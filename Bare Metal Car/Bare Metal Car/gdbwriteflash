@@ -1,3 +1,0 @@
-monitor reset init
-monitor flash write_image erase final.elf
-monitor reset
