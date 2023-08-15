@@ -26,12 +26,12 @@ void USART2_Init()
 	_RCCRA(RCC)->APB2ENR |= RCC_APB2ENR_IOPAEN;	  // 1: I/O port A clock enabled
 	_RCCRA(RCC)->APB2ENR |= RCC_APB2ENR_AFIOEN;	  // 1: Alternate Function I/O clock enabled
 
-	// TX alternative push-pull (PA9)
+	// TX alternative push-pull (PA2)
 	_GPIOPRA(GPIO_P_A)->CRL |= GPIO_CRL_MODE2;	// 11 Output mode, max speed 50 MHz.
 	_GPIOPRA(GPIO_P_A)->CRL &= ~GPIO_CRL_CNF2;	// 00 CNF2 reset
 	_GPIOPRA(GPIO_P_A)->CRL |= GPIO_CRL_CNF2_1; // 10 Alternate function output Push-pull
 
-	// RX float input (PA10)
+	// RX float input (PA3)
 	_GPIOPRA(GPIO_P_A)->CRL &= ~GPIO_CRL_MODE3; // 00 Input mode (reset state)
 	_GPIOPRA(GPIO_P_A)->CRL &= ~GPIO_CRL_CNF3;	// 00 CNF3 reset
 	_GPIOPRA(GPIO_P_A)->CRL |= GPIO_CRL_CNF3_0; // 01 Floating input (reset state)
